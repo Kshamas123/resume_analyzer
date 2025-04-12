@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
+import os
 
 app = Flask(__name__)
+
 @app.route('/score_resume', methods=['POST'])
 def score_resume():
     data = request.get_json()
@@ -12,6 +14,7 @@ def score_resume():
         "score": score,
         "feedback": feedback
     })
+
 def calculate_score(text):
     score = 0
     feedback = []
@@ -42,5 +45,12 @@ def calculate_score(text):
         feedback.append("Add an email to your resume.")
 
     return score, feedback
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Get port from environment variable (for cloud platforms)
+    port = int(os.environ.get("PORT", 5000))
+    
+    # Run the app with '0.0.0.0' for external access
+    app.run(debug=True, host="0.0.0.0", port=port)
+
+
