@@ -24,7 +24,7 @@ def calculate_score(text):
 
     # Criteria 1: Length check
     word_count = len(text.split())
-    if word_count > 300:
+    if word_count > 100:
         score += 10
         feedback.append("Good resume length.")
     else:
