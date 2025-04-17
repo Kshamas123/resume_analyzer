@@ -5,8 +5,11 @@ app = Flask(__name__)
 
 @app.route('/score_resume', methods=['POST'])
 def score_resume():
+    # DEBUG: Print incoming JSON to confirm what n8n sends
+    print("Received data:", request.get_json())
+
     data = request.get_json()
-    resume_text = data.get('resume_text', '')
+    resume_text = data.get('resume_text', '')  # Expecting 'resume_text' field from n8n
 
     score, feedback = calculate_score(resume_text)
 
@@ -52,5 +55,6 @@ if __name__ == '__main__':
     
     # Run the app with '0.0.0.0' for external access
     app.run(debug=True, host="0.0.0.0", port=port)
+
 
 
